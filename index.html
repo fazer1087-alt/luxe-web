@@ -5,19 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LUXE WEB</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
-  font-family: Arial;
-  background: #0a0a0a;
+  font-family: 'Inter', sans-serif;
+  background: black;
   color: white;
+  overflow-x: hidden;
 }
 
+/* ANIMATED BACKGROUND */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, #0072ff33, transparent 60%);
+  animation: moveBg 10s linear infinite;
+  z-index: -1;
+}
+
+@keyframes moveBg {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(-25%, -25%); }
+  100% { transform: translate(0,0); }
+}
+
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  border-bottom: 1px solid #222;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(15px);
 }
 
 nav a {
@@ -26,24 +50,41 @@ nav a {
   text-decoration: none;
 }
 
+nav a:hover {
+  color: #00c6ff;
+}
+
+.lang {
+  cursor: pointer;
+  color: #00c6ff;
+}
+
+/* HERO */
 .hero {
   text-align: center;
-  padding: 120px 20px;
+  padding: 140px 20px;
 }
 
 .hero h1 {
-  font-size: 60px;
+  font-size: 48px;
+  font-weight: 900;
+  background: linear-gradient(45deg,#00c6ff,#ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .btn {
-  background: white;
-  color: black;
-  padding: 12px 25px;
-  border-radius: 12px;
+  margin-top: 25px;
+  background: linear-gradient(45deg,#00c6ff,#0072ff);
+  padding: 15px 30px;
+  border-radius: 14px;
   border: none;
+  color: white;
+  box-shadow: 0 0 30px #0072ff;
   cursor: pointer;
 }
 
+/* SECTIONS */
 .section {
   padding: 80px 20px;
   text-align: center;
@@ -52,106 +93,114 @@ nav a {
 .grid {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .card {
-  background: #111;
   padding: 25px;
   border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.4s;
+  transform: translateY(40px);
+  opacity: 0;
 }
 
+.card.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #00c6ff;
+}
+
+/* GRID */
+@media(min-width:768px){
+  .grid { grid-template-columns: repeat(3,1fr); }
+  .hero h1 { font-size: 70px; }
+}
+
+/* FOOTER */
 footer {
-  border-top: 1px solid #222;
-  padding: 20px;
   text-align: center;
+  padding: 40px;
   color: #777;
 }
 </style>
-
 </head>
 
 <body>
 
 <header>
-  <h2>LUXE WEB</h2>
+  <h3>LUXE WEB</h3>
   <nav>
-    <a href="#">Услуги</a>
-    <a href="#">Портфолио</a>
-    <a href="#">Отзывы</a>
-    <a href="#">Контакты</a>
+    <a data-ru="Услуги" data-en="Services">Услуги</a>
+    <a data-ru="Портфолио" data-en="Portfolio">Портфолио</a>
+    <a data-ru="Отзывы" data-en="Reviews">Отзывы</a>
   </nav>
+  <div class="lang" onclick="toggleLang()">EN</div>
 </header>
 
 <section class="hero">
-  <h1>Создаём сайты<br>премиум уровня</h1>
-  <p>Дизайн, который продаёт. Технологии, которые работают.</p>
-  <br>
-  <button class="btn">Начать проект</button>
+  <h1 data-ru="Создаём цифровой космос" data-en="We build digital universe">
+    Создаём цифровой космос
+  </h1>
+  <p data-ru="Сайты, которые делают бизнес сильнее"
+     data-en="Websites that grow your business">
+     Сайты, которые делают бизнес сильнее
+  </p>
+  <button class="btn" data-ru="Начать проект" data-en="Start Project">Начать проект</button>
 </section>
 
 <section class="section">
-  <h2>Наши услуги</h2>
+  <h2 data-ru="Услуги" data-en="Services">Услуги</h2>
   <div class="grid">
-    <div class="card">Лендинги с высокой конверсией</div>
-    <div class="card">Интернет-магазины под ключ</div>
-    <div class="card">UX/UI дизайн премиум уровня</div>
-    <div class="card">Разработка web-приложений</div>
-    <div class="card">SEO оптимизация</div>
-    <div class="card">Поддержка и развитие</div>
+    <div class="card">🚀 Лендинги</div>
+    <div class="card">🛒 E-commerce</div>
+    <div class="card">🎨 UX/UI</div>
+    <div class="card">⚡ Web apps</div>
+    <div class="card">📈 Маркетинг</div>
+    <div class="card">💎 Брендинг</div>
   </div>
 </section>
 
 <section class="section">
-  <h2>Почему выбирают нас</h2>
+  <h2 data-ru="Отзывы" data-en="Reviews">Отзывы</h2>
   <div class="grid">
-    <div class="card">💎 Дорогой дизайн</div>
-    <div class="card">⚡ Быстрая разработка</div>
-    <div class="card">📈 Рост продаж</div>
-    <div class="card">🔥 Современные технологии</div>
+    <div class="card">🔥 рост x3</div>
+    <div class="card">💎 лучший дизайн</div>
+    <div class="card">🚀 быстрый результат</div>
   </div>
-</section>
-
-<section class="section">
-  <h2>Портфолио</h2>
-  <div class="grid">
-    <div class="card">Интернет-магазин одежды</div>
-    <div class="card">Сайт для ресторана</div>
-    <div class="card">Лендинг крипто-проекта</div>
-    <div class="card">Корпоративный сайт</div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Отзывы клиентов</h2>
-  <div class="grid">
-    <div class="card">"Сайт окупился за 2 недели!"</div>
-    <div class="card">"Очень дорогой и красивый дизайн"</div>
-    <div class="card">"Клиентов стало в 3 раза больше"</div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Пакеты</h2>
-  <div class="grid">
-    <div class="card">Start — $500</div>
-    <div class="card">Business — $1500</div>
-    <div class="card">Premium — $5000+</div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Оставить заявку</h2>
-  <input placeholder="Имя" style="padding:10px;margin:5px;">
-  <input placeholder="Email" style="padding:10px;margin:5px;">
-  <br><br>
-  <button class="btn">Отправить</button>
 </section>
 
 <footer>
-  © 2026 LUXE WEB — Digital Agency
+  © 2026 LUXE WEB
 </footer>
+
+<script>
+// LANG
+let lang = "ru";
+function toggleLang(){
+  lang = lang === "ru" ? "en" : "ru";
+  document.querySelectorAll("[data-ru]").forEach(el=>{
+    el.textContent = el.getAttribute("data-"+lang);
+  });
+  document.querySelector(".lang").textContent = lang === "ru" ? "EN" : "RU";
+}
+
+// ANIMATION
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+});
+document.querySelectorAll(".card").forEach(el=>observer.observe(el));
+</script>
 
 </body>
 </html>
